@@ -4,13 +4,12 @@ class PasswordLog
 {
     private $conn;
 
-    public function __construct()
+    public function __construct($db)
     {
-        $db         = new Database();
-        $this->conn = $db->getConnection();
+        $this->conn = $db;
     }
 
-    public function save(array $passwords): void
+    public function save(array $passwords)
     {
         $stmt = $this->conn->prepare(
             "INSERT INTO generated_passwords (password, length) VALUES (?, ?)"
